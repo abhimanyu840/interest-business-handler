@@ -32,7 +32,7 @@ export default function Home() {
                     <td className="px-4 py-3 text-lg text-gray-900">99999</td>
                     <td className="px-4 py-3 text-lg text-gray-900">12345</td>
                       <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                      <div className="flex cursor-pointer ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu"><Link href="/customer/slug">Details</Link></div>
+                      <Link href="/customer/slug"><div className="flex cursor-pointer ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu">Details</div></Link>
                     </td>
                   </tr>
                   <tr>
