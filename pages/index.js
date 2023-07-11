@@ -1,6 +1,47 @@
+import react from "react"
 import Link from "next/link"
+import customers from "../models/customers"
+import mongoose from "mongoose"
 
-export default function Home() {
+
+const Home = ({ customer }) => {
+  const today = Date()
+  const calculateMonth = (startDate, endDate) => {
+    const start = new Date(startDate);
+    const end = endDate ? new Date(endDate) : new Date();
+
+    const startYear = start.getFullYear();
+    const startMonth = start.getMonth();
+    const endYear = end.getFullYear();
+    const endMonth = end.getMonth();
+
+    let monthDiff = (endYear - startYear) * 12 + (endMonth - startMonth);
+
+    if (end.getDate() < start.getDate()) {
+      monthDiff -= 1;
+    }
+
+    return monthDiff;
+
+  }
+
+  const calcFine = (month, interest) => {
+    let fine = 0;
+    for (let i = 1; i < month; i++) {
+      fine += (interest * 10 * i) / 100
+    }
+    return fine;
+  }
+  console.log(calcFine(5, 50))
+
+
+
+  const fetchUser = async () => {
+
+    console.log('running')
+  }
+
+
   return (
     <>
       <div className="container m-auto justify-center text-center">
@@ -24,102 +65,31 @@ export default function Home() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="px-4 py-3">Abhimanyu</td>
-                    <td className="px-4 py-3">Self</td>
-                    <td className="px-4 py-3">Patilhi,Senduari,Hajipur,Vaishali</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">1000000</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">99999</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">12345</td>
+                  {customer.map((item) => {
+
+
+                    return <tr key={item._id}>
+                      <td className="px-4 py-3">{item.cname}</td>
+                      <td className="px-4 py-3">{item.gname}</td>
+                      <td className="px-4 py-3">{item.address}</td>
+                      <td className="px-4 py-3 text-lg text-gray-900">{item.pamount}</td>
+                      <td className="px-4 py-3 text-lg text-gray-900">{(item.pamount * 5 * calculateMonth(item.paidtill)) / 100}</td>
+                      {console.log('Month=', calculateMonth(item.paidtill), 'Fine=', calcFine(calculateMonth(item.paidtill), (item.pamount * 5) / 100), 'Int=', (item.pamount * 5) / 100)}
+                      <td className="px-4 py-3 text-lg text-gray-900">{calcFine(calculateMonth(item.paidtill), (item.pamount * 5) / 100)}</td>
                       <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                      <Link href="/customer/slug"><div className="flex cursor-pointer ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu">Details</div></Link>
+                        <Link href={`/customer/${item.slug}`}><div className="flex cursor-pointer ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu">Details</div></Link>
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">Abhimanyu</td>
-                    <td className="px-4 py-3">Self</td>
-                    <td className="px-4 py-3">Patilhi,Senduari,Hajipur,Vaishali</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">1000000</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">99999</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">12345</td>
-                      <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                      <div className="flex ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu"><Link href="/customer/slug">Open Details</Link></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">Abhimanyu</td>
-                    <td className="px-4 py-3">Self</td>
-                    <td className="px-4 py-3">Patilhi,Senduari,Hajipur,Vaishali</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">1000000</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">99999</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">12345</td>
-                      <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                      <div className="flex ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu"><Link href="/customer/slug">Open Details</Link></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">Abhimanyu</td>
-                    <td className="px-4 py-3">Self</td>
-                    <td className="px-4 py-3">Patilhi,Senduari,Hajipur,Vaishali</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">1000000</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">99999</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">12345</td>
-                      <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                      <div className="flex ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu"><Link href="/customer/slug">Open Details</Link></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">Abhimanyu</td>
-                    <td className="px-4 py-3">Self</td>
-                    <td className="px-4 py-3">Patilhi,Senduari,Hajipur,Vaishali</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">1000000</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">99999</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">12345</td>
-                      <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                      <div className="flex ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu"><Link href="/customer/slug">Open Details</Link></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">Abhimanyu</td>
-                    <td className="px-4 py-3">Self</td>
-                    <td className="px-4 py-3">Patilhi,Senduari,Hajipur,Vaishali</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">1000000</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">99999</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">12345</td>
-                      <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                      <div className="flex ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu"><Link href="/customer/slug">Open Details</Link></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">Abhimanyu</td>
-                    <td className="px-4 py-3">Self</td>
-                    <td className="px-4 py-3">Patilhi,Senduari,Hajipur,Vaishali</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">1000000</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">99999</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">12345</td>
-                      <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                      <div className="flex ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu"><Link href="/customer/slug">Open Details</Link></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">Abhimanyu</td>
-                    <td className="px-4 py-3">Self</td>
-                    <td className="px-4 py-3">Patilhi,Senduari,Hajipur,Vaishali</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">1000000</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">99999</td>
-                    <td className="px-4 py-3 text-lg text-gray-900">12345</td>
-                      <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                      <div className="flex ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu"><Link href="/customer/slug">Open Details</Link></div>
-                    </td>
-                  </tr>
-                  
-                  
+                    </tr>
+                  })}
+
+
+
 
                 </tbody>
               </table>
             </div>
             <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-              <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Button</button>
+              <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" onClick={fetchUser}>Button</button>
             </div>
           </div>
         </section>
@@ -127,5 +97,26 @@ export default function Home() {
       </div>
 
     </>
+    // This gets called on every request
   )
 }
+export const getServerSideProps = async (context) => {
+  // Fetch data from external API
+  // const res = await fetch(`http://localhost:3000/api/fetchcustomer`)
+  if (!mongoose.connections[0].readyState) {
+
+    await mongoose.connect(process.env.MONGO_URI)
+  }
+  let customer = await customers.find()
+  // res.status(200).json({ customer })
+  // const data = await res.json()
+
+  // Pass data to the page via props
+  return {
+    props: { customer: JSON.parse(JSON.stringify(customer)) }
+  }
+}
+
+
+
+export default Home

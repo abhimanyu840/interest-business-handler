@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const CustomerSchema = new Schema({
+    uid: {
+        type: String,
+        required: true
+    },
     cname: {
         type: String,
         required: true
@@ -18,6 +22,12 @@ const CustomerSchema = new Schema({
         type: Number,
         required: true
     },
+    paidamount: [{
+        type: Number,
+    }],
+    paidinterest: [{
+        type: Number
+    }],
     slug: {
         type: String,
         required: true,

@@ -28,6 +28,7 @@ function MyApp({ Component, pageProps }) {
   }, [router.query]);
   const logout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('id')
     setUser({ value: null })
     setKey(Math.random())
   }
@@ -37,7 +38,7 @@ function MyApp({ Component, pageProps }) {
   progress={progress}
   waitingTime={400}
   onLoaderFinished={() => setProgress(0)}
-  /><Navbar user={user} logout={logout} key={key} /><Component {...pageProps} /></>
+  /><Navbar user={user} logout={logout} key={key}  /><Component {...pageProps} /></>
 }
 
 export default MyApp

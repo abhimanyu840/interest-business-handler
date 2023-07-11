@@ -3,9 +3,9 @@ import connectDb from "../../middleware/mongoose";
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
-    const { _id, cname, gname, address, pamount, slug, date, paidtill } = req.body;
+    const { _id, cname, gname, address, pamount, paidamount, paidinterest, slug, date, paidtill } = req.body;
     let customer = await customers.findById({ _id });
-    await customer.update({cname, gname, address, pamount, slug, date, paidtill});
+    await customer.updateOne({cname, gname, address, pamount,paidamount,paidinterest, slug, date, paidtill});
     // await customer.update();
     res.status(200).json({ success: "success" })
   }

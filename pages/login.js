@@ -37,7 +37,9 @@ const Login = () => {
 
         if (response.success) {
             localStorage.setItem('token',response.token)
+            localStorage.setItem('id',response._id)
             toast.success(`Logged In`)
+            // console.log(response._id)
             setTimeout(() => {
                 
                 router.push('http://localhost:3000')
