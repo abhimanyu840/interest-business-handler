@@ -37,7 +37,8 @@ const Login = () => {
 
         if (response.success) {
             localStorage.setItem('token',response.token)
-            localStorage.setItem('id',response._id)
+            localStorage.setItem('id', response._id)
+            cookieStore.set('id', response._id)
             toast.success(`Logged In`)
             // console.log(response._id)
             setTimeout(() => {

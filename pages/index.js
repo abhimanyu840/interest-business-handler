@@ -1,15 +1,33 @@
-import react from "react"
+import react, { useContext,createContext, useEffect } from "react"
 import Link from "next/link"
 import customers from "../models/customers"
 import mongoose from "mongoose"
+import { Router, useRouter } from "next/router"
+import { useState } from "react"
+import { parse } from "cookie"
 
 
-const Home = ({ customer }) => {
-  const today = Date()
+const Home = ({ customer,user }) => {
+  const router = useRouter();
   const calculateMonth = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = endDate ? new Date(endDate) : new Date();
+    const [id, setId] = useState(null);
 
+    // useEffect(() => {
+      
+    //   // Check if id is not available or false, then redirect to the login page
+    //   const storedId = localStorage.getItem("id");
+    //   // const storedId = user.id;
+    //   if (!storedId) {
+    //     router.push("/login");
+    //   }
+    //   else {
+    //     setId(storedId);
+    //   }
+    // }, [router]);
+    // console.log(id)
+    
     const startYear = start.getFullYear();
     const startMonth = start.getMonth();
     const endYear = end.getFullYear();
@@ -32,14 +50,7 @@ const Home = ({ customer }) => {
     }
     return fine;
   }
-  console.log(calcFine(5, 50))
 
-
-
-  const fetchUser = async () => {
-
-    console.log('running')
-  }
 
 
   return (
@@ -50,6 +61,7 @@ const Home = ({ customer }) => {
         </h1>
         <section className="text-gray-600 body-font">
           <div className="px-5 py-8 mx-auto">
+    {/* {console.log(id)} */}
 
             <div className="lg:w-4/5 w-full mx-auto overflow-auto">
               <table className="table-auto w-full text-left whitespace-no-wrap">
@@ -77,7 +89,7 @@ const Home = ({ customer }) => {
                       {console.log('Month=', calculateMonth(item.paidtill), 'Fine=', calcFine(calculateMonth(item.paidtill), (item.pamount * 5) / 100), 'Int=', (item.pamount * 5) / 100)}
                       <td className="px-4 py-3 text-lg text-gray-900">{calcFine(calculateMonth(item.paidtill), (item.pamount * 5) / 100)}</td>
                       <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                        <Link href={`/customer/${item.slug}`}><div className="flex cursor-pointer ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu">Details</div></Link>
+                        <Link passHref={true} href={`/customer/${item.slug}`}><div className="flex cursor-pointer ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu">Details</div></Link>
                     </td>
                     </tr>
                   })}
@@ -89,7 +101,7 @@ const Home = ({ customer }) => {
               </table>
             </div>
             <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-              <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" onClick={fetchUser}>Button</button>
+              <Link passHref={true} href={'/createcustomer'}><button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Create Customer</button></Link>
             </div>
           </div>
         </section>
@@ -107,15 +119,31 @@ export const getServerSideProps = async (context) => {
 
     await mongoose.connect(process.env.MONGO_URI)
   }
-  let customer = await customers.find()
-  // res.status(200).json({ customer })
-  // const data = await res.json()
+
+  const { req } = context;
+  const cookies = await parse(req.headers.cookie || "");
+  const storedId = cookies.id;
+  if (!storedId ) {
+    // If not available, redirect to the login page
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  // let customer = await customers.find({'uid':'64aa8c5e0f098a522cf57789'})
+  // let customer = await customers.find()
+  let customer = await customers.find({uid:storedId })
 
   // Pass data to the page via props
   return {
     props: { customer: JSON.parse(JSON.stringify(customer)) }
   }
 }
+
+
 
 
 

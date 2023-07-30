@@ -8,6 +8,7 @@ import Showhistorymodal from '../../components/Showhistorymodal'
 const Post = () => {
     const router = useRouter()
     const { slug } = router.query
+    console.log(slug)
     const [payIntFineModal, setPayIntFineModal] = useState(false)
     const [giveMoneyModal, setGiveMoneyModal] = useState(false)
     const [reduceMoneyModal, setReduceMoneyModal] = useState(false)
@@ -83,5 +84,6 @@ const Post = () => {
         </>
     )
 }
+
 
 export default Post
