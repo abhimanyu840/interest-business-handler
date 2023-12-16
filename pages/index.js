@@ -61,7 +61,8 @@ const Home = ({ customer,user }) => {
         </h1>
         <section className="text-gray-600 body-font">
           <div className="px-5 py-8 mx-auto">
-    {/* {console.log(id)} */}
+            {/* {console.log(id)} */}
+            {/* {console.log(customer)} */}
 
             <div className="lg:w-4/5 w-full mx-auto overflow-auto">
               <table className="table-auto w-full text-left whitespace-no-wrap">
@@ -86,13 +87,15 @@ const Home = ({ customer,user }) => {
                       <td className="px-4 py-3">{item.address}</td>
                       <td className="px-4 py-3 text-lg text-gray-900">{item.pamount}</td>
                       <td className="px-4 py-3 text-lg text-gray-900">{(item.pamount * 5 * calculateMonth(item.paidtill)) / 100}</td>
-                      {console.log('Month=', calculateMonth(item.paidtill), 'Fine=', calcFine(calculateMonth(item.paidtill), (item.pamount * 5) / 100), 'Int=', (item.pamount * 5) / 100)}
+                      {/* {console.log('Month=', calculateMonth(item.paidtill), 'Fine=', calcFine(calculateMonth(item.paidtill), (item.pamount * 5) / 100), 'Int=', (item.pamount * 5) / 100)} */}
                       <td className="px-4 py-3 text-lg text-gray-900">{calcFine(calculateMonth(item.paidtill), (item.pamount * 5) / 100)}</td>
                       <td className="flex  m-2 lg:w-2/3 w-full mx-auto text-sm">
-                        <Link passHref={true} href={`/customer/${item.slug}`}><div className="flex cursor-pointer ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu">Details</div></Link>
-                    </td>
+                        <Link passHref={true} href={`/customer/${item.slug}` } ><div className="flex cursor-pointer ml-auto text-white bg-purple-900 text-sm border-0 p-2 px-6 focus:outline-none hover:bg-purple-600 rounded font-ubuntu">Details</div></Link>
+                      </td>
+                      {/* {console.log(item.cname)} */}
                     </tr>
                   })}
+                  {/* {console.log(customer)} */}
 
 
 
