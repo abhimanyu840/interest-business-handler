@@ -84,11 +84,11 @@ const Post = (customer) => {
                         </div>
                         <div className="form-group mb-6">
                             <label htmlFor="date" className="form-label inline-block mb-2 text-gray-700 font-ubuntu font-semibold">Date Taken</label>
-                            <span type="date" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="date" placeholder="Date Taken" >{(customer.customer.date)}</span>
+                            <span type="date" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="date" placeholder="Date Taken" >{new Date(customer.customer.date).toISOString().split('T')[0]}</span>
                         </div>
                         <div className="form-group mb-6">
                             <label htmlFor="paidtill" className="form-label inline-block mb-2 text-gray-700 font-ubuntu font-semibold">Paid Till</label>
-                            <span type="date" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="paidtill" placeholder="Paid Till" >{customer.customer.paidtill}</span>
+                            <span type="date" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="paidtill" placeholder="Paid Till" >{new Date(customer.customer.paidtill).toISOString().split('T')[0]}</span>
                         </div>
                         <div className="form-group mb-6">
                             <label htmlFor="pamount" className="form-label inline-block mb-2 text-gray-700 font-ubuntu font-semibold">Principal Amount</label>

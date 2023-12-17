@@ -23,10 +23,40 @@ const CustomerSchema = new Schema({
         required: true
     },
     paidamount: [{
-        type: Number,
+        amount: {
+            type: Number,
+        },
+        date: {
+            type: Date,
+            default: Date.now
+        }
     }],
     paidinterest: [{
-        type: Number
+        amount: {
+            type: Number,
+        },
+        date: {
+            type: Date,
+            default: Date.now
+        }
+    }],
+    paidfine: [{
+        amount: {
+            type: Number,
+        },
+        date: {
+            type: Date,
+            default: Date.now
+        }
+    }],
+    total: [{
+        amount: {
+            type: Number,
+        },
+        date: {
+            type: Date,
+            default: Date.now
+        }
     }],
     slug: {
         type: String,
@@ -41,4 +71,5 @@ const CustomerSchema = new Schema({
         type: Date,
     },
 });
+
 export default mongoose.models.Customer || mongoose.model('Customer', CustomerSchema);
