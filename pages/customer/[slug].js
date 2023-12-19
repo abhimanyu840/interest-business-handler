@@ -57,7 +57,7 @@ const Post = (customer) => {
                 {payIntFineModal && <PayIntFineModal closeModal={setPayIntFineModal} customer={customer.customer} calculateMonth={calculateMonth} calcFine={calcFine} />}
                 {giveMoneyModal && <Givemoneymodal closeModal={setGiveMoneyModal} customer={customer.customer} />}
                 {reduceMoneyModal && <Redmoneymodal closeModal={setReduceMoneyModal} customer={customer.customer} />}
-                {showHistoryModal && <Showhistorymodal closeModal={setShowHistoryModal} />}
+                {showHistoryModal && <Showhistorymodal closeModal={setShowHistoryModal} customer={customer.customer} />}
                 <div className="block mx-auto p-4 md:p-6 rounded-lg shadow-lg bg-white w-full md:w-4/5">
                     <div className="text-center text-5xl underline p-1  text-purple-700 font-extrabold font-barlow">Customer Details</div>
                     {/* {customer.map((item) => {
