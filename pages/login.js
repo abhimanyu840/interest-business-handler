@@ -21,7 +21,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = { email, password };
-        const res = await fetch(`${process.env.HOST || 'http://localhost:3000'}/api/fetchuser`, {
+        const res = await fetch(`${process.env.HOST || 'https://interestbusinesshandler.netlify.app'}/api/fetchuser`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const Login = () => {
             // console.log(response._id)
             setTimeout(() => {
                 
-                router.push('http://localhost:3000')
+                router.push('https://interestbusinesshandler.netlify.app')
             }, 1700);
         }
         else {

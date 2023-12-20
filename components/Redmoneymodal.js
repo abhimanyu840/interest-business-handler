@@ -30,7 +30,7 @@ const Redmoneymodal = ({ closeModal, customer }) => {
                 paidamount: parseFloat(-rmoney)
             }
             try {
-                const res = await fetch(`${process.env.HOST || 'http://localhost:3000'}/api/updatecustomer`, {
+                const res = await fetch(`${process.env.HOST || 'https://interestbusinesshandler.netlify.app'}/api/updatecustomer`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const Redmoneymodal = ({ closeModal, customer }) => {
                     toast.success('Updated Successfully');
 
                     setTimeout(() => {
-                        router.push('http://localhost:3000');
+                        router.push('https://interestbusinesshandler.netlify.app');
                         toast.info('Redirecting to Home Page');
                     }, 1500);
                 } else {

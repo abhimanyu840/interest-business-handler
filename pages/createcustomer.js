@@ -29,7 +29,7 @@ const CreateCustomer = () => {
         const data = { uid, cname: customerName, gname: guarantorName, address, pamount, slug, date, paidtill }
         console.log(data);
         if (data) {
-            const res = await fetch(`${process.env.HOST || 'http://localhost:3000'}/api/createcustomer`, {
+            const res = await fetch(`${process.env.HOST || 'https://interestbusinesshandler.netlify.app'}/api/createcustomer`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const CreateCustomer = () => {
             if (response.success == 'success') {
                 toast.success('Customer Succesfully Added')
                 setTimeout(() => {
-                    router.push('http://localhost:3000')
+                    router.push('https://interestbusinesshandler.netlify.app')
                 }, 1500);
             }
             else {

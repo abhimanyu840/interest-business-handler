@@ -27,7 +27,7 @@ const Signup = () => {
         const data = { name, email, password };
         console.log(data);
         if (password === cpassword) {
-            const res = await fetch(`${process.env.HOST || 'http://localhost:3000'}/api/createuser`, {
+            const res = await fetch(`${process.env.HOST || 'https://interestbusinesshandler.netlify.app'}/api/createuser`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const Signup = () => {
                         toast.info('Redirecting to Homepage')
                     }, 800);
                     setTimeout(() => {
-                        router.push('http://localhost:3000')
+                        router.push('https://interestbusinesshandler.netlify.app')
                     }, 1500);
                 }
                 else {
@@ -60,7 +60,7 @@ const Signup = () => {
                         toast.info('Redirecting to Login Page')
                     }, 800);
                     setTimeout(() => {
-                        router.push('http://localhost:3000/login')
+                        router.push('https://interestbusinesshandler.netlify.app/login')
                     }, 2000);
 
                 }
