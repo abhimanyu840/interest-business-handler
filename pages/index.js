@@ -12,7 +12,6 @@ const Home = ({ customer,user }) => {
   const calculateMonth = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = endDate ? new Date(endDate) : new Date();
-    const [id, setId] = useState(null);
 
     // useEffect(() => {
       

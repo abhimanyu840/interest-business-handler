@@ -25,7 +25,6 @@ const Post = (customer) => {
     const calculateMonth = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = endDate ? new Date(endDate) : new Date();
-        const [id, setId] = useState(null);
 
         const startYear = start.getFullYear();
         const startMonth = start.getMonth();

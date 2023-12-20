@@ -82,7 +82,7 @@ const Redmoneymodal = ({ closeModal, customer }) => {
                         <input type="text" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="cname" placeholder="Customer Name" readOnly={true} value={customer.cname} />
                     </div>
                     <div className="form-group mb-6">
-                        <label htmlFor="gname" className='form-label inline-block mb-2 text-gray-700 font-ubuntu font-semibold'>Guarantor's Name</label>
+                        <label htmlFor="gname" className='form-label inline-block mb-2 text-gray-700 font-ubuntu font-semibold'>Guarantor Name</label>
                         <span type="text" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="gname" placeholder="Guarantor's Name" >{customer.gname}</span>
                     </div>
                     <div className="form-group mb-6">
