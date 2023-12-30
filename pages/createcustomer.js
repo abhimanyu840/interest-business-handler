@@ -9,7 +9,7 @@ const CreateCustomer = () => {
     const [amount, setAmount] = useState('');
     const [date, setDate] = useState('');
     var slugify = require('slugify')
-    const slugword = customerName + address;
+    const slugword = customerName + address + Date.now();
     const router = useRouter();
 
 
@@ -26,8 +26,7 @@ const CreateCustomer = () => {
         const uid = localStorage.getItem('id')
         let pamount = Number.parseInt(amount)
         let paidtill = date;
-        const data = { uid, cname: customerName, gname: guarantorName, address, pamount, slug, date, paidtill }
-        console.log(data);
+        const data = { uid, cname: customerName, gname: guarantorName, address, pamount, paidamount: [{ amount: parseFloat(pamount), date: new Date() }], slug, date, paidtill }
         if (data) {
             const res = await fetch(`${process.env.HOST || 'https://interestbusinesshandler.netlify.app'}/api/createcustomer`, {
                 method: "POST",
@@ -38,7 +37,7 @@ const CreateCustomer = () => {
             });
 
             let response = await res.json();
-            console.log(response);
+            // console.log(response);
             if (response.success == 'success') {
                 toast.success('Customer Succesfully Added')
                 setTimeout(() => {
@@ -53,13 +52,13 @@ const CreateCustomer = () => {
             toast.error("Please Enter The Data")
         }
         // Handle form submission here
-        console.log('Form submitted');
-        console.log('Customer Name:', customerName);
-        console.log('Guarantor Name:', guarantorName);
-        console.log('Address:', address);
-        console.log('Amount:', amount);
-        console.log('Date:', date);
-        console.log('Slug:', slug);
+        // console.log('Form submitted');
+        // console.log('Customer Name:', customerName);
+        // console.log('Guarantor Name:', guarantorName);
+        // console.log('Address:', address);
+        // console.log('Amount:', amount);
+        // console.log('Date:', date);
+        // console.log('Slug:', slug);
         // slugify('some string', '_')
         // Reset form fields
         setCustomerName('');
